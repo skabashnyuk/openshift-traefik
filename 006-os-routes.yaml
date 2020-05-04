@@ -1,0 +1,37 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: traefik-web
+spec:
+  to:
+    kind: Service
+    name: traefik
+    weight: 100
+  port:
+    targetPort: web
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: traefik-admin
+spec:
+  to:
+    kind: Service
+    name: traefik
+    weight: 100
+  port:
+    targetPort: admin
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: tref-websecure
+spec:
+  to:
+    kind: Service
+    name: traefik
+    weight: 100
+  port:
+    targetPort: websecure
+
+
