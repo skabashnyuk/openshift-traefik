@@ -2,29 +2,13 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: simpleingressroute
-  namespace: default
+  namespace: cheuser-che
 spec:
   entryPoints:
     - web
   routes:
-  - match: Host(`your.example.com`) && PathPrefix(`/notls`)
+  - match: PathPrefix(`/whoami`)
     kind: Rule
     services:
     - name: whoami
-      port: 80
-
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: ingressroutetls
-  namespace: default
-spec:
-  entryPoints:
-    - websecure
-  routes:
-  - match: Host(`your.example.com`) && PathPrefix(`/tls`)
-    kind: Rule
-    services:
-    - name: whoami
-      port: 80
+      port: 8080
