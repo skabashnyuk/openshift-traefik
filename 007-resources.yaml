@@ -1,8 +1,8 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: simpleingressroute
-  namespace: cheuser-che
+  name: cheuser-che-route
+  namespace: traefik-che
 spec:
   entryPoints:
     - web
@@ -11,4 +11,21 @@ spec:
     kind: Rule
     services:
     - name: whoami
+      namespace: cheuser-che
+      port: 8080
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: cheuser-che-2-route
+  namespace: traefik-che
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: PathPrefix(`/whoami2`)
+    kind: Rule
+    services:
+    - name: whoami
+      namespace: cheuser-che-2
       port: 8080
